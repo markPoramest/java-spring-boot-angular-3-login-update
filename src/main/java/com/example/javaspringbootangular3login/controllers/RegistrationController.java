@@ -19,9 +19,16 @@ public class RegistrationController {
         return service.findAll();
     }
 
+    @PostMapping("/save")
+    public User save(@RequestBody User user){
+        return service.saveUser(user);
+    }
+
     @PostMapping("/register")
+    @CrossOrigin("http://localhost:4200/register")
     public User saveUser(@RequestBody  User user) throws Exception {
         String email = user.getEmail();
+        System.out.println("email : "+user.getEmail());
         User u1 = null;
         u1 = service.findByEmail(email);
         if(!email.isEmpty() && u1!=null && email.equals(u1.getEmail())){
